@@ -36,7 +36,7 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 include_directories(${OpenCV_INCLUDE_DIRS} ..)
 
 # Declare the executable target built from your sources
-add_executable(test_performance test_performance.cpp ../HOG.cpp)
+add_executable(test_performance test_performance.cpp ../../HOG.cpp ../../HOG.hpp)
 
 # Link your application with OpenCV libraries
 target_link_libraries(test_performance ${OpenCV_LIBS})

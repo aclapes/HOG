@@ -5,7 +5,8 @@ cmake_minimum_required(VERSION 2.8)
 project(HOG_project)
 
 #add_definitions( -fopenmp -O2)
-SET(GCC_COVERAGE_COMPILE_FLAGS "-std=c++14 -O2")
+#SET(GCC_COVERAGE_COMPILE_FLAGS "-std=c++14 -O2")
+SET(GCC_COVERAGE_COMPILE_FLAGS "-std=c++14")
 #SET(GCC_COVERAGE_LINK_FLAGS    "-fopenmp")
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
 #SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
@@ -15,6 +16,8 @@ IF(OPENMP_FOUND)
 	SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 ENDIF()
+
+FIND_PACKAGE( Boost REQUIRED system filesystem program_options)
 
 # Find OpenCV, you may need to set OpenCV_DIR variable
 # to the absolute path to the directory containing OpenCVConfig.cmake file
@@ -33,13 +36,13 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 
 
 # Add OpenCV headers location to your include paths
-include_directories(${OpenCV_INCLUDE_DIRS})
+include_directories(${OpenCV_INCLUDE_DIRS} ${Boost_INCLUDE_DIR})
 
 # Declare the executable target built from your sources
-add_executable(main main.cpp HOG.cpp)
+add_executable(main main.cpp HOG.cpp csv.hpp)
 
 # Link your application with OpenCV libraries
-target_link_libraries(main ${OpenCV_LIBS})
+target_link_libraries(main ${OpenCV_LIBS} ${Boost_LIBRARIES})
 
 # create shared library
 #add_library(HOG SHARED HOG.cpp)

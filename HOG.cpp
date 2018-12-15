@@ -33,6 +33,7 @@
 #include "opencv2/highgui/highgui.hpp"
 #include <iostream>
 #include <algorithm>
+#include <numeric>
 #include <memory>
 #include <vector>
 #include <functional>
